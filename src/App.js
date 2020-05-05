@@ -21,7 +21,7 @@ function App() {
       console.log(e.data)
     };
 
-    return () => ws.current.close();
+    return () => ws.close();
   }, []);
 
 
