@@ -10,12 +10,14 @@ import Dashboard from './components/dashboard/dashboard';
 function App() {
   const [message, setMessage] = useState('');
   const ws = useRef(null)
+  
   useEffect(() => {
     console.log('object')
     ws.current = new WebSocket('ws://localhost:5000/');
-    ws.current.onmessage = (message) => {
-      console.log(message.data)
-       setMessage(message.data);
+    ws.current.onmessage = (e) => {
+      const message = JSON.parse(e.data);
+      // console.log("e", message);
+      setMessage(message)
     };
   
     return () => ws.close();
