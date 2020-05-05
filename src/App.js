@@ -15,10 +15,10 @@ function App() {
     console.log('object')
     ws.current = new WebSocket('ws://localhost:5000/');
     ws.current.onmessage = (e) => {
-      const message = JSON.parse(e.data);
+      // const message = JSON.parse(e.data);
       // console.log("e", message);
-      setMessage(message)
-      console.log(message)
+      setMessage(e.data)
+      console.log(e.data)
     };
 
     return () => ws.current.close();
