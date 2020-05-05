@@ -5,14 +5,15 @@ import useScript from './components/hooks/useScript';
 import useCss from './components/hooks/loadCss';
 import Dashboard from './components/dashboard/dashboard';
 
-const ws = new WebSocket('ws://localhost:5000/');
+// const ws = new WebSocket('ws://localhost:5000/');
 
 function App() {
   const [message, setMessage] = useState('');
-
+  const ws = useRef(null)
   useEffect(() => {
     console.log('object')
-    ws.onmessage = (message) => {
+    ws.current = new WebSocket('ws://localhost:5000/');
+    ws.current.onmessage = (message) => {
       console.log(message.data)
        setMessage(message.data);
     };
