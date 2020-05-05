@@ -8,16 +8,16 @@ import Dashboard from './components/dashboard/dashboard';
 const ws = new WebSocket('ws://localhost:5000/');
 
 function App() {
-  const [messages, setMessages] = useState([]);
-  const webSocket = useRef(null);
+  const [messages, setMessages] = useState('');
 
   useEffect(() => {
-    webSocket.current = new WebSocket("'ws://localhost:5000/");
-    webSocket.current.onmessage = (message) => {
-      setMessages(prev => [...prev, message.data]);
+    console.log('object')
+    ws.onmessage = (message) => {
+      setMessages(message.data);
     };
-    return () => webSocket.current.close();
-  }, []);
+  
+    return () => ws.close();
+  },[]);
 
 
   // useScript(['https://code.jquery.com/jquery-3.4.1.slim.min.js',
@@ -41,7 +41,7 @@ function App() {
 
   return (
     <div className="App">
-      {messages.join(" ")}
+      <p>{messages}</p>
     </div>
   );
 }
