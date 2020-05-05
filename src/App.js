@@ -8,12 +8,13 @@ import Dashboard from './components/dashboard/dashboard';
 const ws = new WebSocket('ws://localhost:5000/');
 
 function App() {
-  const [messages, setMessages] = useState('');
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
     console.log('object')
     ws.onmessage = (message) => {
-      setMessages(message.data);
+      console.log(message.data)
+       setMessage(message.data);
     };
   
     return () => ws.close();
@@ -41,7 +42,7 @@ function App() {
 
   return (
     <div className="App">
-      <p>{messages}</p>
+      <p>{message}</p>
     </div>
   );
 }
