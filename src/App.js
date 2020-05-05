@@ -1,4 +1,4 @@
-import React, { useState, useEffect,useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './App.css';
 // import './assets/css/theme.min.css'
 import useScript from './components/hooks/useScript';
@@ -10,18 +10,19 @@ import Dashboard from './components/dashboard/dashboard';
 function App() {
   const [message, setMessage] = useState('');
   const ws = useRef(null)
-  
+
   useEffect(() => {
     console.log('object')
     ws.current = new WebSocket('ws://localhost:5000/');
     ws.current.onmessage = (e) => {
       const message = JSON.parse(e.data);
       // console.log("e", message);
-      setMessage(message)
+      // setMessage(message)
+      console.log(message)
     };
-  
+
     return () => ws.close();
-  },[]);
+  }, []);
 
 
   // useScript(['https://code.jquery.com/jquery-3.4.1.slim.min.js',
