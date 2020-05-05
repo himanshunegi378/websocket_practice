@@ -16,29 +16,30 @@ function App() {
     ws.current = new WebSocket("ws://localhost:5000/");
     ws.current.onopen = () => console.log("ws opened");
     ws.current.onclose = () => console.log("ws closed");
-
+    ws.current.onmessage = e => {
+      const message = JSON.parse(e.data);
+      // console.log("e", message);
+      setMessage(message)
+    };
     return () => {
       ws.current.close();
     };
   }, []);
 
-  useEffect(() => {
-    if (!ws.current) return;
-console.log('object')
-    ws.current.onmessage = e => {
-      if (isPaused) return;
-      const message = JSON.parse(e.data);
-      // console.log("e", message);
-      setMessage(message)
-    };
-  }, [isPaused]);
+  // useEffect(() => {
+  //   if (!ws.current) return;
+  //   console.log('object')
+  //   ws.current.onmessage = e => {
+  //     const message = JSON.parse(e.data);
+  //     // console.log("e", message);
+  //     setMessage(message)
+  //   };
+  // }, []);
 
   return (
     <div>
-      <button onClick={() => setPause(!isPaused)}>
-        {isPaused ? "Resume" : "Pause"}
-      </button>
-      {isPaused ? <></> : <p>{message}</p>}
+
+      <p>{message}</p>
 
     </div>
   );
