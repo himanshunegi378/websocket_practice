@@ -17,11 +17,11 @@ function App() {
     ws.current.onmessage = (e) => {
       const message = JSON.parse(e.data);
       // console.log("e", message);
-      // setMessage(message)
+      setMessage(message)
       console.log(message)
     };
 
-    return () => ws.close();
+    return () => ws.current.close();
   }, []);
 
 
